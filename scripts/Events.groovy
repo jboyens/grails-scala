@@ -4,57 +4,69 @@ Ant.property(environment: "env")
 scalaHome = Ant.antProject.properties."env.SCALA_HOME"
 
 /**
- * Returns a classpath containing all Scala jar files found in ${SCALA_HOME}/lib
- */
-scalaClasspath = {
-    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
-    if (!scalaDir) println "[scalaPlugin] No Scala jar files found at SCALA_HOME=${scalaHome}"
-    for (d in scalaDir) {
-        pathelement(location: "${d.file.absolutePath}")
-    }
-}
-
-/**
  * Hooks to the compile grails event
  */
 eventCompileStart = {GantBinding compileBinding ->
+    if (compilingScalaPlugin()) return
+
+    if ((!scalaHome) || (buildConfig.scala?.useBundledLibs)) {
+        println '[scalaPlugin] Ignoring SCALA_HOME. Using bundled Scala distribution'
+        scalaHome = "${getPluginDirForName("scala").file}/lib/bundledScala"
+    } else {
+        println '[scalaPlugin] Using SCALA_HOME Scala distribution'
+    }
+
+    if (!buildConfig.scala?.no?.jar?.copy) copyScalaLibs(ant)
 
 //ant.path(id: "grails.compile.classpath", compileClasspath)
 
     ant.path(id: "grails.compile.scala", scalaClasspath)
-
     ant.taskdef(name: 'scalac', classname: 'scala.tools.ant.Scalac', classpathref: "grails.compile.scala")
 
-    if (!scalaHome) println '[scalaPlugin] Cannot find SCALA_HOME. Skipping Scala compilation'
-    else {
-        println "[scalaPlugin] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath"
+    println "[scalaPlugin] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath"
 
-        Ant.sequential {
-            addScalaToCompileSrcPaths(compileBinding)
-            addScalaToCompileClassPath(compileBinding)
+    Ant.sequential {
+        addScalaToCompileSrcPaths(compileBinding)
+        addScalaToCompileClassPath(compileBinding)
 
-            ant.mkdir(dir: classesDirPath)
-            def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
+        ant.mkdir(dir: classesDirPath)
+        def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
 
-            //todo document limitations
-            //todo document src folders
-            //todo document configuration
-            //todo document need for scala-lib in the lib folder
-            //todo document need for SCALA_HOME
-            //todo enable Scala in tests
-            //todo generate Groovy skeletons
-            try {
-                ant.scalac(destdir: classesDirPath,
-                        classpathref: "grails.compile.classpath",
-                        encoding: scalaSrcEncoding) {
-                    src(path: "${basedir}/src/java")
-                    src(path: "${basedir}/src/scala")
-                }
-            }
-            catch (Exception e) {
-                Ant.fail(message: "Could not compile Scala sources: " + e.class.simpleName + ": " + e.message)
+        //todo document src folders
+        //todo enable Scala in tests
+        try {
+            ant.scalac(destdir: classesDirPath,
+                    classpathref: "grails.compile.classpath",
+                    encoding: scalaSrcEncoding) {
+                src(path: "${basedir}/src/java")
+                src(path: "${basedir}/src/scala")
             }
         }
+        catch (Exception e) {
+            Ant.fail(message: "Could not compile Scala sources: " + e.class.simpleName + ": " + e.message)
+        }
+    }
+}
+
+/**
+ * Copies the scala libraries from either SCALA_HOME or bundled Scala location to the lib folder.
+ * Doesn't overwrite alredy exitent libraries.
+ */
+private def copyScalaLibs(ant) {
+    println "[scalaPlugin] Copying Scala jar files from ${scalaHome}/lib"
+    ant.copy(todir: "${basedir}/lib", overwrite: false) {
+        fileset(dir: "${scalaHome}/lib", includes: "scala-library.jar scala-compiler.jar")
+    }
+}
+
+/**
+ * Returns a classpath containing all Scala jar files found in ${SCALA_HOME}/lib
+ */
+scalaClasspath = {
+    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
+    if (!scalaDir) println "[scalaPlugin] No Scala jar files found at ${scalaHome}"
+    for (d in scalaDir) {
+        pathelement(location: "${d.file.absolutePath}")
     }
 }
 
@@ -84,3 +96,7 @@ private def addScalaToCompileClassPath(GantBinding compileBinding) {
     ant.path(id: "grails.compile.classpath", newCompilerClassPath)
 }
 
+/**
+ * Detects whether we're compiling the scala plugin itself
+ */
+private boolean compilingScalaPlugin() { getPluginDirForName("scala") == null }
