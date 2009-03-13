@@ -2,14 +2,7 @@
 <project relativePaths="false" version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala/lib/scala-library.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScalaPlugin.iws" afterPath="$PROJECT_DIR$/ScalaPlugin.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala/lib/scala-compiler.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/Events.groovy" afterPath="$PROJECT_DIR$/scripts/Events.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugin.xml" afterPath="$PROJECT_DIR$/plugin.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala/lib" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScalaGrailsPlugin.groovy" afterPath="$PROJECT_DIR$/ScalaGrailsPlugin.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SCALA_LICENSE" />
     </list>
     <ignored path="ScalaPlugin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,10 +56,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Events.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Events.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/Events.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="23" selection-start="1291" selection-end="1291" vertical-scroll-proportion="0.9147982">
+            <state line="36" column="23" selection-start="1291" selection-end="1291" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SCALA_LICENSE" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SCALA_LICENSE">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="0" selection-start="1734" selection-end="1734" vertical-scroll-proportion="0.88938713">
               <folding />
             </state>
           </provider>
@@ -383,10 +385,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1174" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3288719" sideWeight="0.5" order="7" side_tool="false" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3288719" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935324" sideWeight="0.5" order="1" side_tool="false" />
@@ -547,7 +549,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/Events.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="23" selection-start="1291" selection-end="1291" vertical-scroll-proportion="0.9147982">
+        <state line="36" column="23" selection-start="1291" selection-end="1291" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SCALA_LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1734" selection-end="1734" vertical-scroll-proportion="0.88938713">
           <folding />
         </state>
       </provider>
