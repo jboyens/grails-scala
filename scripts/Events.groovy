@@ -5,8 +5,9 @@ import org.codehaus.gant.GantBinding
  * It also updates source and class paths for the groovyc compiler with scala sources and libraries and optionally
  * copies Scala runtime libraries to the project's lib folder.
  *
- * Scala sources may be placed and combined in any way with Java sources in either /src/java or /src/scala.
- * Currently the groovy sources are not directly visible inside the Scala sources.
+ * Scala sources may be placed and combined in any way with Java sources in and across both /src/java and /src/scala.
+ * Currently the Groovy sources are not directly visible inside the Scala sources, but Groovy sources can use all Scala
+ * or Java classes.
  */
 Ant.property(environment: "env")
 scalaHome = Ant.antProject.properties."env.SCALA_HOME"

@@ -60,10 +60,8 @@
       <file leaf-file-name="Events.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/Events.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="82" selection-start="517" selection-end="517" vertical-scroll-proportion="0.20118344">
-              <folding>
-                <marker date="1237020191718" expanded="true" signature="38:521" placeholder="/*...*/" />
-              </folding>
+            <state line="8" column="90" selection-start="535" selection-end="535" vertical-scroll-proportion="0.20118344">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -415,7 +413,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated to 0.3 version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comments updated" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -429,6 +427,7 @@
     <MESSAGE value="Bundled Scala distribution" />
     <MESSAGE value="Licenses moved" />
     <MESSAGE value="Updated to 0.3 version" />
+    <MESSAGE value="Comments updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -545,10 +544,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/Events.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="82" selection-start="517" selection-end="517" vertical-scroll-proportion="0.20118344">
-          <folding>
-            <marker date="1237020191718" expanded="true" signature="38:521" placeholder="/*...*/" />
-          </folding>
+        <state line="8" column="90" selection-start="535" selection-end="535" vertical-scroll-proportion="0.20118344">
+          <folding />
         </state>
       </provider>
     </entry>
