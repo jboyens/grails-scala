@@ -1,5 +1,13 @@
 import org.codehaus.gant.GantBinding
 
+/*
+ * Hooks an event handler to the CompileStart event to run the Scala compiler on Java and Scala sources.
+ * It also updates source and class paths for the groovyc compiler with scala sources and libraries and optionally
+ * copies Scala runtime libraries to the project's lib folder.
+ *
+ * Scala sources may be placed and combined in any way with Java sources in either /src/java or /src/scala.
+ * Currently the groovy sources are not directly visible inside the Scala sources.
+ */
 Ant.property(environment: "env")
 scalaHome = Ant.antProject.properties."env.SCALA_HOME"
 
