@@ -6,7 +6,8 @@ import org.codehaus.gant.GantBinding
  * copies Scala runtime libraries to the project's lib folder.
  *
  * Scala sources may be placed and combined in any way with Java sources in and across both /src/java and /src/scala.
- * Currently the Groovy sources are not directly visible inside the Scala sources, but Groovy sources can use all Scala
+ * All the Groovy sources including Grails-specific ones, like domain classes, controllers and such,
+ * are directly visible inside the Scala sources, as well as all Groovy sources can use all Scala
  * or Java classes.
  */
 Ant.property(environment: "env")
@@ -25,38 +26,70 @@ eventCompileStart = {GantBinding compileBinding ->
         println '[scalaPlugin] Using SCALA_HOME Scala distribution'
     }
 
-    if (!buildConfig.scala?.no?.jar?.copy) copyScalaLibs(ant)
-
 //ant.path(id: "grails.compile.classpath", compileClasspath)
 
-    ant.path(id: "grails.compile.scala", scalaClasspath)
-    ant.taskdef(name: 'scalac', classname: 'scala.tools.ant.Scalac', classpathref: "grails.compile.scala")
+    ant.path(id: "scalaJars") {
+        fileset(dir: "${scalaHome}/lib", includes: "*.jar")
+    }
 
-    println "[scalaPlugin] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath"
+    ant.path(id: "scala.compile.classpath") {
+        path(refid: "grails.compile.classpath")
+        path(refid: "scalaJars")
+    }
 
-    Ant.sequential {
+    ant.taskdef(name: 'generateGroovyStubsForScala', classname: 'org.codehaus.groovy.grails.cli.GenerateStubsTask')
+    ant.taskdef(name: 'scalac', classname: 'scala.tools.ant.Scalac', classpathref: "scala.compile.classpath")
+
+    try {
+        //todo use ${grails.target}/docs/classes
+        //todo exclude "**/*.properties" from src for stubs
+        def stubdir = "${classesDir.absolutePath}/stubs"
+        println "[scalaPlugin] Generating Groovy stubs to $stubdir"
+        ant.mkdir(dir: stubdir)
+//        ant.chmod(file:stubdir, perm:"777")
+
+        ant.generateGroovyStubsForScala(destdir: stubdir, classpathref: "grails.compile.classpath") {
+            def excludedPaths = ["views", "i18n", "conf"] // conf gets special handling
+
+            for (dir in new File("${basedir}/grails-app").listFiles()) {
+                if (!excludedPaths.contains(dir.name) && dir.isDirectory())
+                    src(path: "${dir}")
+            }
+            // Handle conf/ separately to exclude subdirs/package misunderstandings
+//                src(path: "${basedir}/grails-app/conf")
+            // This stops resources.groovy becoming "spring.resources"
+//                src(path: "${basedir}/grails-app/conf/spring")
+            src(path: "${basedir}/src/groovy")
+//                src(path: "${basedir}/src/java")
+//                src(path: "${basedir}/src/scala")
+        }
+
+
+        println "[scalaPlugin] Compiling Scala sources with SCALA_HOME=${scalaHome} to $classesDirPath"
+        def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
         addScalaToCompileSrcPaths(compileBinding)
-        addScalaToCompileClassPath(compileBinding)
 
         ant.mkdir(dir: classesDirPath)
-        def scalaSrcEncoding = buildConfig.scala?.src?.encoding ?: 'UTF-8'
+        ant.scalac(destdir: classesDirPath,
+                classpathref: "scala.compile.classpath",
+                encoding: scalaSrcEncoding) {
+            src(path: "${basedir}/src/java")
+            src(path: "${basedir}/src/scala")
+            src(path: "${classesDir.absolutePath}/stubs")
+        }
 
-        //todo document src folders
-        //todo enable Scala in tests
-        try {
-            ant.scalac(destdir: classesDirPath,
-                    classpathref: "grails.compile.classpath",
-                    encoding: scalaSrcEncoding) {
-                src(path: "${basedir}/src/java")
-                src(path: "${basedir}/src/scala")
-            }
-        }
-        catch (Exception e) {
-            Ant.fail(message: "Could not compile Scala sources: " + e.class.simpleName + ": " + e.message)
-        }
+        //todo enable
+//            ant.delete(dir:"${classesDir.absolutePath}/stubs")
+
+        if (!buildConfig.scala?.no?.jar?.copy) copyScalaLibs(ant)
+    } catch (Exception e) {
+        Ant.fail(message: "Could not compile Scala sources: " + e.class.simpleName + ": " + e.message)
     }
 }
 
+//todo update to scala-2.7.4
+//todo test on a fresh project
+//todo test with updated IntelliJ IDEA Scala plugin - jars needed in dependencies
 /**
  * Copies the scala libraries from either SCALA_HOME or bundled Scala location to the lib folder.
  * Doesn't overwrite alredy exitent libraries.
@@ -69,18 +102,8 @@ private def copyScalaLibs(ant) {
 }
 
 /**
- * Returns a classpath containing all Scala jar files found in ${SCALA_HOME}/lib
- */
-scalaClasspath = {
-    def scalaDir = resolveResources("file:${scalaHome}/lib/*")
-    if (!scalaDir) println "[scalaPlugin] No Scala jar files found at ${scalaHome}"
-    for (d in scalaDir) {
-        pathelement(location: "${d.file.absolutePath}")
-    }
-}
-
-/**
- * Enhances the "compilerPaths" variable with "/src/scala"
+ * Enhances the "compilerPaths" variable with "/src/scala" so that the groovyc compiler can find Java sources under
+ * the "/src/scala" folder
  */
 private def addScalaToCompileSrcPaths(GantBinding compileBinding) {
     def compilerPaths = compileBinding.getVariable("compilerPaths")
@@ -90,19 +113,6 @@ private def addScalaToCompileSrcPaths(GantBinding compileBinding) {
         compilerPaths(classpathId, compilingTests)
     }
     compileBinding.setVariable("compilerPaths", newCompilerPaths)
-}
-
-/**
- * Enhances "grails.compile.classpath" scala libraries from ${SCALA_HOME}/lib
- */
-private def addScalaToCompileClassPath(GantBinding compileBinding) {
-    def originalCompilerClassPath = compileBinding.getVariable("classpath")
-    def newCompilerClassPath = {->
-        scalaClasspath()
-        originalCompilerClassPath.delegate = delegate
-        originalCompilerClassPath()
-    }
-    ant.path(id: "grails.compile.classpath", newCompilerClassPath)
 }
 
 /**
