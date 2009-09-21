@@ -25,11 +25,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="6efa0e97-e2b3-420e-a2c4-96d7316f0a60" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScalaPlugin.iws" afterPath="$PROJECT_DIR$/ScalaPlugin.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Scala.iml" afterPath="$PROJECT_DIR$/Scala.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala/lib/scala-dbc.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala/lib/sbaz-tests.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala/lib/sbaz.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bundledScala/lib/scala-swing.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grails-scala-0.5.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ScalaPlugin.ipr" afterPath="$PROJECT_DIR$/ScalaPlugin.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application.properties" afterPath="$PROJECT_DIR$/application.properties" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="ScalaPlugin.iws" />
@@ -105,7 +105,7 @@
       <file leaf-file-name="ScalaGrailsPlugin.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ScalaGrailsPlugin.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="21" selection-start="73" selection-end="73" vertical-scroll-proportion="0.038946163">
+            <state line="20" column="55" selection-start="677" selection-end="707" vertical-scroll-proportion="0.38946164">
               <folding />
             </state>
           </provider>
@@ -347,8 +347,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ScalaPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="ScalaPlugin" />
@@ -362,8 +370,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Favorites" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -379,8 +385,8 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -524,16 +530,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\work\Projects\grails\ScalaPlugin" />
-          <option name="myCopyRoot" value="C:\work\Projects\grails\ScalaPlugin" />
+          <option name="myVcsRoot" value="C:\work\Projects\grails\ScalaDemo2" />
+          <option name="myCopyRoot" value="C:\work\Projects\grails\ScalaDemo2" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\work\Projects\grails\ScalaPlugin" />
-          <option name="myCopyRoot" value="C:\work\Projects\grails\ScalaPlugin" />
+          <option name="myVcsRoot" value="C:\work\Projects\grails\ScalaDemo2" />
+          <option name="myCopyRoot" value="C:\work\Projects\grails\ScalaDemo2" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -549,7 +555,7 @@
             </list>
           </option>
           <option name="created" value="1253506469296" />
-          <option name="updated" value="1253506731343" />
+          <option name="updated" value="1253507275312" />
         </task>
       </list>
     </option>
@@ -576,9 +582,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1408" height="1024" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="true" weight="0.3303671" sideWeight="0.0" order="7" side_tool="false" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3303671" sideWeight="0.0" order="7" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" />
@@ -705,14 +711,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/META-INF/NOTICE.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="139" selection-end="139" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="0" selection-start="139" selection-end="139" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ScalaGrailsPlugin.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="73" selection-end="73" vertical-scroll-proportion="0.038946163">
+        <state line="20" column="55" selection-start="677" selection-end="707" vertical-scroll-proportion="0.38946164">
           <folding />
         </state>
       </provider>
