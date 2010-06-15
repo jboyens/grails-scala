@@ -1,4 +1,4 @@
-<plugin name='scala' version='0.5' grailsVersion='1.1 &gt; *'>
+<plugin name='scala' version='0.6' grailsVersion='1.1 &gt; *'>
   <author>Vaclav Pech</author>
   <title>Scala Plugin</title>
   <description>\
@@ -9,4 +9,5 @@ Compiles Scala sources located under src/scala and src-java before grails kicks 
     <resource>UrlMappings</resource>
   </resources>
   <dependencies />
+  <behavior />
 </plugin>

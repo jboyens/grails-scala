@@ -107,10 +107,10 @@ private def copyScalaLibs(ant) {
  */
 private def addScalaToCompileSrcPaths(GantBinding compileBinding) {
     def compilerPaths = compileBinding.getVariable("compilerPaths")
-    def newCompilerPaths = {String classpathId, boolean compilingTests ->
+    def newCompilerPaths = { String classpathId ->
         src(path: "${basedir}/src/scala")
         compilerPaths.delegate = delegate
-        compilerPaths(classpathId, compilingTests)
+        compilerPaths(classpathId)
     }
     compileBinding.setVariable("compilerPaths", newCompilerPaths)
 }
